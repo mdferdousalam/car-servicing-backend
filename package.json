@@ -1,0 +1,9 @@
+{
+  "name": "car-servicing-backend",
+  "version": "1.0.0",
+  "description": "car servicing and washing center",
+  "main": "index.js",
+  "repository": "https://github.com/mdferdousalam/car-servicing-backend.git",
+  "author": "mdferdousalam <mdferdousalam1989@yahoo.com>",
+  "license": "MIT"
+}
