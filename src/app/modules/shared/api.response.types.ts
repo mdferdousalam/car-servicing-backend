@@ -13,6 +13,7 @@ export interface APIResponseError {
   statusCode: number;
   message: string;
   errors?: any[];
+  stack?: string;
 }
 
 export type APIResponse = APIResponseSuccess | APIResponseError;
@@ -23,9 +24,9 @@ function sendAPIResponse(res: Response, response: APIResponse) {
 
 export function SUCCESS(
   res: Response,
+  statusCode: number = 200,
   message: string,
   data?: any,
-  statusCode: number = 200
 ) {
   const apiResponse: APIResponseSuccess = {
     success: true,
@@ -38,15 +39,17 @@ export function SUCCESS(
 
 export function ERROR(
   res: Response,
+  statusCode: number = 400,
   message: string,
   errors?: any[],
-  statusCode: number = 400
+  stack?: string
 ) {
   const apiResponse: APIResponseError = {
     success: false,
     statusCode,
     message,
     errors,
+    stack,
   };
   sendAPIResponse(res, apiResponse);
 }
