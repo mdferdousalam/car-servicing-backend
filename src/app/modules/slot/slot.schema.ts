@@ -5,7 +5,7 @@ export const slotSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format"),
   startTime: z.string().regex(/^\d{2}:\d{2}$/, "Invalid start time format"),
   endTime: z.string().regex(/^\d{2}:\d{2}$/, "Invalid end time format"),
-  isBooked: z.enum(["available", "booked", "canceled"]),
+  isBooked: z.enum(["available", "booked", "canceled"]).optional(),
 });
 
 // To validate data:
