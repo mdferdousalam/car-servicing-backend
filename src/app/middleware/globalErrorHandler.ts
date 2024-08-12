@@ -25,8 +25,7 @@ function globalErrorHandler(
   } else if (err instanceof mongoose.Error.CastError) {
     errorResponse = handleCastError(err);
   } else if (err.code && err.code === 11000) {
-    // Duplicate key error
-    errorResponse = handleDuplicateError(err);
+      errorResponse = handleDuplicateError(err);
   } else {
     errorResponse = {
       success: false,
