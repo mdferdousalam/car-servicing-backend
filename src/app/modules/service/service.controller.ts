@@ -4,16 +4,71 @@ import { SUCCESS, ERROR } from "../shared/api.response.types";
 import { ServiceServices } from "./service.service";
 import httpStatus from "http-status";
 
+
 const createService = async (req: Request, res: Response) => {
   try {
     const service = await ServiceServices.createServiceIntoDB(req.body);
-    SUCCESS(res,httpStatus.CREATED, "Service created successfully", service);
+    SUCCESS(res, httpStatus.CREATED, "Service created successfully", service);
   } catch (error: any) {
-    ERROR(res,httpStatus.INTERNAL_SERVER_ERROR, "Failed to create Service", [error.message]);
+    ERROR(res, httpStatus.INTERNAL_SERVER_ERROR, "Failed to create Service", [
+      error.message,
+    ]);
+  }
+};
+const getServiceById = async (req: Request, res: Response) => {
+  try {
+    const service = await ServiceServices.getServiceByIdFromDB(req.params.id);
+    SUCCESS(res, httpStatus.OK, "Service retrieved successfully", service);
+  } catch (error: any) {
+    ERROR(res, httpStatus.INTERNAL_SERVER_ERROR, "Failed to retrieve Service", [
+      error.message,
+    ]);
   }
 };
 
+const getAllServices = async (req: Request, res: Response) => {
+  try {
+    const services = await ServiceServices.getAllServicesFromDB();
+    SUCCESS(res, httpStatus.OK, "Services retrieved successfully", services);
+  } catch (error: any) {
+    ERROR(
+      res,
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "Failed to retrieve Services",
+      [error.message]
+    );
+  }
+};
+
+const updateService = async (req: Request, res: Response) => {
+  try {
+    const service = await ServiceServices.updateServiceInDB(
+      req.params.id,
+      req.body
+    );
+    SUCCESS(res, httpStatus.OK, "Service updated successfully", service);
+  } catch (error: any) {
+    ERROR(res, httpStatus.INTERNAL_SERVER_ERROR, "Failed to update Service", [
+      error.message,
+    ]);
+  }
+};
+
+const deleteService = async (req: Request, res: Response) => {
+  try {
+    await ServiceServices.softDeleteServiceInDB(req.params.id);
+    SUCCESS(res, httpStatus.OK, "Service deleted successfully");
+  } catch (error: any) {
+    ERROR(res, httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete Service", [
+      error.message,
+    ]);
+  }
+};
 
 export const ServiceControllers = {
   createService,
+  getServiceById,
+  getAllServices,
+  updateService,
+  deleteService,
 };
