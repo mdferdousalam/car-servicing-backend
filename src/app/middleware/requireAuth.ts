@@ -10,7 +10,10 @@ import { UserModel } from "../modules/user/user.model";
 const requireAuth = (...requiredRoles: Roles[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const token = req.headers.authorization;
+       const authHeader = req.headers.authorization;
+
+       // Extract the token from the "Bearer" schema
+       const token = authHeader?.split(" ")[1];
 
       // Check if the token is missing
       if (!token) {
