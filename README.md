@@ -1,5 +1,3 @@
-# car-servicing-backend
-
 # Car Wash Booking System
 
 ## Project Overview
