@@ -1,7 +1,5 @@
 # car-servicing-backend
-Here’s a `README.md` file outlining the setup and steps to run the project locally:
 
-```markdown
 # Car Wash Booking System
 
 ## Project Overview
